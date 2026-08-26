@@ -1,6 +1,8 @@
 name: release build
 
 on:
+  push:
+    tags: ['[0-9]+.[0-9]+.[0-9]+.[0-9]+-[0-9]+']
   workflow_dispatch:
     inputs:
       architecture:
@@ -27,7 +29,7 @@ on:
         type: string
 
 concurrency:
-  group: build-hosted-${{ inputs.architecture }}
+  group: build-hosted-${{ inputs.architecture || 'all' }}
   cancel-in-progress: false
 
 jobs:
@@ -35,7 +37,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        architecture: ${{ inputs.architecture == 'all' && fromJSON('["arm64","arm"]') || fromJSON(format('["{0}"]', inputs.architecture)) }}
+        architecture: ${{ (github.event_name == 'push' || inputs.architecture == 'all') && fromJSON('["arm64","arm"]') || fromJSON(format('["{0}"]', inputs.architecture)) }}
     permissions:
       contents: read
       actions: read
@@ -45,12 +47,12 @@ jobs:
     secrets: inherit
     with:
       architecture: ${{ matrix.architecture }}
-      chromium_source: ${{ inputs.chromium_source }}
+      chromium_source: ${{ inputs.chromium_source || 'github' }}
       source_run_id: ${{ inputs.source_run_id }}
 
   release:
     needs: build
-    if: ${{ inputs.release_name != '' && needs.build.result == 'success' }}
+    if: ${{ (github.event_name == 'push' && github.ref_name || inputs.release_name) != '' && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -62,11 +64,16 @@ jobs:
       - shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          NAME: ${{ inputs.release_name }}
+          NAME: ${{ github.event_name == 'push' && github.ref_name || inputs.release_name }}
         run: |
           files=()
           while IFS= read -r f; do files+=("$f"); done < <(find rel -name 'ChromePublic_*.apk' -o -name 'ChromePublic_arm64.aab')
           [ "${#files[@]}" -gt 0 ] || { echo "FATAL: no release files found"; exit 1; }
+          for f in "${files[@]}"; do
+              case "$f" in
+                  *.apk) [ -f "${f}.idsig" ] || { echo "FATAL: $f is not release-signed, refusing to publish"; exit 1; } ;;
+              esac
+          done
           printf 'releasing %s with:\n' "$NAME"
           printf '  %s\n' "${files[@]}"
           gh release create "$NAME" "${files[@]}" \
