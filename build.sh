@@ -247,6 +247,15 @@ if [ "$INSTALL_DEPS" = y ]; then
     apt-get -qq install -y lsb-release file 2>/dev/null \
         || sudo -n apt-get -qq install -y lsb-release file
     ( cd src && ./build/install-build-deps.sh --no-prompt --android --unsupported ) || exit $?
+else
+    dependencies=("nproc patch ccache zip") # TODO: add more dependencies
+
+    for dependency in ${dependencies[@]}; do
+        if [ -z "$(which $dependency)" ]; then
+            echo "FATAL: Missing dependency: $dependency."
+            exit 10
+        fi
+    done
 fi
 
 if [ "$RESUME" != y ]; then
@@ -329,7 +338,10 @@ export CCACHE_CPP2=yes
 export CCACHE_SLOPPINESS=time_macros
 
 ## Build
-NINJA_JOBS="${NINJA_JOBS:-5}"
+if [ ${NINJA_JOBS:-0} -eq 0 ]; then
+    NINJA_JOBS=$(nproc)
+fi
+
 ninja_build() {
   _dir="$1"
   shift

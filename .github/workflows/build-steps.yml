@@ -13,6 +13,10 @@ on:
         required: false
         type: string
         default: ''
+      threads:
+        required: false
+        type: number
+        default: 0
 
 jobs:
   prep:
@@ -32,6 +36,7 @@ jobs:
           UGC_WORK: /mnt/ugc
           DEBIAN_FRONTEND: noninteractive
           CHROMIUM_SOURCE: ${{ inputs.chromium_source == 'github' && 'https://github.com/chromium/chromium.git' || 'https://chromium.googlesource.com/chromium/src.git' }}
+          NINJA_JOBS: ${{ inputs.threads }}
         run: >
           .github/scripts/hosted-build.sh --install-deps --prepare-only
           --arch "${{ inputs.architecture }}"

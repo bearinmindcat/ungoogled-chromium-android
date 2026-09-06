@@ -26,6 +26,11 @@ on:
         default: 'no'
         type: choice
         options: ['no', 'yes']
+      threads:
+        description: 'number of threads to use (0 = all)'
+        required: false
+        default: 0
+        type: number
 
 permissions:
   contents: write
@@ -65,6 +70,7 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
           CHROMIUM_SOURCE: ${{ inputs.chromium_source == 'github' && 'https://github.com/chromium/chromium.git' || 'https://chromium.googlesource.com/chromium/src.git' }}
+          NINJA_JOBS: ${{ inputs.threads }}
         run: ./build.sh ${{ inputs.resume == 'yes' && '--resume' || '' }} --arch "${{ inputs.architecture }}" --target chrome_modern_target
 
       - name: Sign and assemble

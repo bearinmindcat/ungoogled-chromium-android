@@ -27,6 +27,11 @@ on:
         required: false
         default: ''
         type: string
+      threads:
+        description: 'number of threads to use (0 = all)'
+        required: false
+        default: 0
+        type: number
 
 concurrency:
   group: build-hosted-${{ inputs.architecture || 'all' }}
@@ -49,6 +54,7 @@ jobs:
       architecture: ${{ matrix.architecture }}
       chromium_source: ${{ inputs.chromium_source || 'github' }}
       source_run_id: ${{ inputs.source_run_id }}
+      threads: ${{ inputs.threads }}
 
   release:
     needs: build
