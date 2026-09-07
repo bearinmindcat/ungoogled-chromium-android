@@ -1,3 +1,11 @@
+# 152.0.7977.82-1
+* Upstream update (v150.0.7871.114-1 to v152.0.7977.82)
+* Refreshed the full patch series against 152; all patches apply with no fuzz or offset
+* Re-anchored patches where upstream relocated code (safe_browsing dep moved to source_set("core"), proxy_api_helpers.cc and EnterpriseInfoImpl.java moved packages)
+* Adapted patches for 152 API changes: CreatePrefProxyConfigTrackerOfProfile gained a PolicyService argument, buildModelForStandardMenuItem moved to AppMenuItemUtils
+* Dropped hunks made obsolete by upstream deletions in fix-degoogle-core-werror-batch2-150
+* Added src-fix/fix-safebrowsing-suspicious-site-dialog-152 for the new chrome/browser/ui/android/safe_browsing code that calls the removed suspicious site controller
+
 # 150.0.7871.114-1
 * Upstream update (v99.0.4844.51-1 to v150.0.7871.114)
 * Refreshed patches from bromite, cromite (bromite successor), & vanadium; doing my best to mirror the previous maintainers philosophy and patch structure
