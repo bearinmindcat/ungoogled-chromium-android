@@ -9,6 +9,9 @@ inputs:
   source_run_id:
     required: false
     default: ''
+  threads:
+    required: false
+    default: '0'
   keystore_b64:
     required: false
   keystore_pass:
@@ -42,7 +45,7 @@ runs:
       env:
         UGC_WORK: /mnt/ugc
         NINJA_TIMEOUT: '16200s'
-        NINJA_JOBS: '4'
+        NINJA_JOBS: ${{ inputs.threads }}
         DEBIAN_FRONTEND: noninteractive
         CHROMIUM_SOURCE: ${{ inputs.chromium_source == 'github' && 'https://github.com/chromium/chromium.git' || 'https://chromium.googlesource.com/chromium/src.git' }}
       run: >

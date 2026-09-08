@@ -247,15 +247,17 @@ if [ "$INSTALL_DEPS" = y ]; then
     apt-get -qq install -y lsb-release file 2>/dev/null \
         || sudo -n apt-get -qq install -y lsb-release file
     ( cd src && ./build/install-build-deps.sh --no-prompt --android --unsupported ) || exit $?
-else
-    dependencies=("nproc patch ccache zip") # TODO: add more dependencies
+fi
 
-    for dependency in ${dependencies[@]}; do
-        if [ -z "$(which $dependency)" ]; then
-            echo "FATAL: Missing dependency: $dependency."
-            exit 10
-        fi
-    done
+dependencies=(patch ccache zip python3)
+missing=()
+for dependency in "${dependencies[@]}"; do
+    command -v "$dependency" >/dev/null 2>&1 || missing+=("$dependency")
+done
+if [ ${#missing[@]} -ne 0 ]; then
+    echo "FATAL: missing required tools: ${missing[*]}"
+    echo "  Install them with your package manager (per-distro lists are in README.md)."
+    exit 10
 fi
 
 if [ "$RESUME" != y ]; then
@@ -338,7 +340,10 @@ export CCACHE_CPP2=yes
 export CCACHE_SLOPPINESS=time_macros
 
 ## Build
-if [ ${NINJA_JOBS:-0} -eq 0 ]; then
+case "${NINJA_JOBS:-0}" in
+    ''|*[!0-9]*) NINJA_JOBS=0 ;;
+esac
+if [ "${NINJA_JOBS:-0}" -eq 0 ]; then
     NINJA_JOBS=$(nproc)
 fi
 

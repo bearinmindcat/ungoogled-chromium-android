@@ -54,7 +54,7 @@ jobs:
       architecture: ${{ matrix.architecture }}
       chromium_source: ${{ inputs.chromium_source || 'github' }}
       source_run_id: ${{ inputs.source_run_id }}
-      threads: ${{ inputs.threads }}
+      threads: ${{ inputs.threads || 0 }}
 
   release:
     needs: build

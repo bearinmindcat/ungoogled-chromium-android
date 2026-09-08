@@ -70,6 +70,7 @@ jobs:
           architecture: ${{ inputs.architecture }}
           chromium_source: ${{ inputs.chromium_source }}
           source_run_id: ${{ inputs.source_run_id }}
+          threads: ${{ inputs.threads }}
           keystore_b64: ${{ secrets.KEYSTORE_B64 }}
           keystore_pass: ${{ secrets.KEYSTORE_PASS }}
 
@@ -87,6 +88,7 @@ jobs:
         with:
           architecture: ${{ inputs.architecture }}
           chromium_source: ${{ inputs.chromium_source }}
+          threads: ${{ inputs.threads }}
           keystore_b64: ${{ secrets.KEYSTORE_B64 }}
           keystore_pass: ${{ secrets.KEYSTORE_PASS }}
 
@@ -104,6 +106,7 @@ jobs:
         with:
           architecture: ${{ inputs.architecture }}
           chromium_source: ${{ inputs.chromium_source }}
+          threads: ${{ inputs.threads }}
           keystore_b64: ${{ secrets.KEYSTORE_B64 }}
           keystore_pass: ${{ secrets.KEYSTORE_PASS }}
 
@@ -121,6 +124,7 @@ jobs:
         with:
           architecture: ${{ inputs.architecture }}
           chromium_source: ${{ inputs.chromium_source }}
+          threads: ${{ inputs.threads }}
           keystore_b64: ${{ secrets.KEYSTORE_B64 }}
           keystore_pass: ${{ secrets.KEYSTORE_PASS }}
 
@@ -138,6 +142,7 @@ jobs:
         with:
           architecture: ${{ inputs.architecture }}
           chromium_source: ${{ inputs.chromium_source }}
+          threads: ${{ inputs.threads }}
           keystore_b64: ${{ secrets.KEYSTORE_B64 }}
           keystore_pass: ${{ secrets.KEYSTORE_PASS }}
 
@@ -155,6 +160,7 @@ jobs:
         with:
           architecture: ${{ inputs.architecture }}
           chromium_source: ${{ inputs.chromium_source }}
+          threads: ${{ inputs.threads }}
           keystore_b64: ${{ secrets.KEYSTORE_B64 }}
           keystore_pass: ${{ secrets.KEYSTORE_PASS }}
 
@@ -172,6 +178,7 @@ jobs:
         with:
           architecture: ${{ inputs.architecture }}
           chromium_source: ${{ inputs.chromium_source }}
+          threads: ${{ inputs.threads }}
           keystore_b64: ${{ secrets.KEYSTORE_B64 }}
           keystore_pass: ${{ secrets.KEYSTORE_PASS }}
 
@@ -189,6 +196,7 @@ jobs:
         with:
           architecture: ${{ inputs.architecture }}
           chromium_source: ${{ inputs.chromium_source }}
+          threads: ${{ inputs.threads }}
           keystore_b64: ${{ secrets.KEYSTORE_B64 }}
           keystore_pass: ${{ secrets.KEYSTORE_PASS }}
   attest:
