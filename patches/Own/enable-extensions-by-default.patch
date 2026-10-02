@@ -1,3 +1,5 @@
+author: bearinmindcat <bearincrypto@gmail.com>
+
 --- a/extensions/common/extension_features.cc
 +++ b/extensions/common/extension_features.cc
 @@ -254,7 +254,7 @@ BASE_FEATURE(kOptimizeWebRequestProxy, b

@@ -502,13 +502,12 @@ License: GPL-2.0-or-later - https://spdx.org/licenses/GPL-2.0-or-later.html
          Preference captions = findPreference(PREF_CAPTIONS);
          captions.setOnPreferenceClickListener(
                  preference -> {
-@@ -285,6 +295,9 @@ public class AccessibilitySettings exten
+@@ -285,6 +295,8 @@ public class AccessibilitySettings exten
          assertNonNull(mDelegate);
          if (PREF_FORCE_ENABLE_ZOOM.equals(preference.getKey())) {
              mDelegate.getForceEnableZoomAccessibilityDelegate().setValue((Boolean) newValue);
 +        } else if (PREF_FORCE_TABLET_UI.equals(preference.getKey())) {
 +            mForceTabletUIDelegate.setValue((Boolean) newValue);
-+            // Force-tablet takes effect on next app launch (no immediate restart at 150).
          } else if (PREF_READER_FOR_ACCESSIBILITY.equals(preference.getKey())) {
              boolean readerModeEnabled = (Boolean) newValue;
              mDelegate.getReaderAccessibilityDelegate().setValue(readerModeEnabled);

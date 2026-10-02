@@ -46,7 +46,7 @@ date: Tue, 22 Jul 2026
  
  BASE_FEATURE(kNetworkErrorLogging, base::FEATURE_ENABLED_BY_DEFAULT);
  
-+// Enable save-data header separately, without enabling Data Saver.
++// Enable save-data header seprately, without enabled data reduction service
 +BASE_FEATURE(kEnableSaveDataHeader, base::FEATURE_DISABLED_BY_DEFAULT);
 +
  BASE_FEATURE(kReporting, base::FEATURE_ENABLED_BY_DEFAULT);

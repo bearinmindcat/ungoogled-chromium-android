@@ -10,7 +10,7 @@ date: Tue, 22 Jul 2026
                  };
  
 -        if (!CommandLine.getInstance()
-+        if (false /* offline indicator disabled (ungoogled) */ && !CommandLine.getInstance()
++        if (false && !CommandLine.getInstance()
                  .hasSwitch(ContentSwitches.FORCE_ONLINE_CONNECTION_STATE_FOR_INDICATOR)) {
              mOfflineIndicatorController =
                      new OfflineIndicatorControllerV2(

@@ -36,10 +36,10 @@ Enable incognito custom tabs and fix crashes for incognito/custom tab intents (c
        android:title="@string/security_section_title" />
 --- /dev/null
 +++ b/chrome/android/java/src/org/chromium/chrome/browser/AlwaysIncognitoLinkInterceptor.java
-@@ -0,0 +1,73 @@
-+// Copyright 2017 The Chromium Authors
-+// Use of this source code is governed by a BSD-style license that can be
-+// found in the LICENSE file.
+@@ -0,0 +1,75 @@
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 +
 +package org.chromium.chrome.browser;
 +
@@ -56,8 +56,10 @@ Enable incognito custom tabs and fix crashes for incognito/custom tab intents (c
 +import java.util.Map;
 +import java.util.Set;
 +
-+/** A TabObserver implementing the always-incognito preference: intercepts links opened in
-+ *  non-incognito tabs and reopens them in new incognito tabs when the preference is set. */
++/**
++ * A {@link TabObserver} that implements the always-incognito preference behavior for links. When the preference is set
++ * to true, it intercepts links opened within observed {@link Tab}s and opens them in new incognito <code>Tab</code>s instead.
++ */
 +public class AlwaysIncognitoLinkInterceptor extends EmptyTabObserver {
 +    public static final String PREF_ALWAYS_INCOGNITO = "always_incognito";
 +

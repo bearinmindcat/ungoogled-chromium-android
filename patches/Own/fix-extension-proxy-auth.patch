@@ -1,4 +1,5 @@
-subject: Let extensions answer proxy logins on Android
+description: Let extensions answer proxy logins on Android
+author: bearinmindcat <bearincrypto@gmail.com>
 
 VPN and proxy extensions answer a proxy's 407 challenge through
 webRequest.onAuthRequired. The hand-off from the login flow to webRequest was only

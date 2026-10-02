@@ -21,12 +21,11 @@ Subject: Add flag to disable WebGL
       MULTI_VALUE_TYPE(kEnableBenchmarkingChoices)},
 --- a/chrome/browser/flag-metadata.json
 +++ b/chrome/browser/flag-metadata.json
-@@ -2736,6 +2736,11 @@
+@@ -2736,6 +2736,10 @@
      "expiry_milestone": 116
    },
    {
 +    "name": "disable-webgl",
-+    // "owners": [ "your-team" ],
 +    "expiry_milestone": -1
 +  },
 +  {
