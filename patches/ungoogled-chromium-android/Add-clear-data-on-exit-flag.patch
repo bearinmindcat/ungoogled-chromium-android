@@ -71,7 +71,7 @@ diff '--color=auto' -ur orig/chrome/android/java/src/org/chromium/chrome/browser
  #include "chrome/common/pref_names.h"
  #include "components/prefs/pref_service.h"
  #include "content/public/browser/browser_context.h"
-@@ -34,10 +37,24 @@ void TerminateAndroid() {
+@@ -34,10 +37,23 @@ void TerminateAndroid() {
      prefs->ClearPref(prefs::kRestartLastSessionOnShutdown);
    }
  
@@ -79,8 +79,7 @@ diff '--color=auto' -ur orig/chrome/android/java/src/org/chromium/chrome/browser
 +      ChromeBrowsingDataLifetimeManagerFactory::GetForProfile(
 +          ProfileManager::GetActiveUserProfile());
 +  if (browsing_data_lifetime_manager) {
-+    // Delete browsing data as set by the clear-data-on-exit flag or the
-+    // ClearBrowsingDataOnExitList policy.
++    // Delete browsing data set by the ClearBrowsingDataOnExitList policy.
 +    browsing_data_lifetime_manager->ClearBrowsingDataForOnExitPolicy(
 +        /*keep_browser_alive=*/true);
 +  }

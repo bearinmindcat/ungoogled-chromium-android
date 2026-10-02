@@ -1,3 +1,10 @@
+From 3544b647526bedfb3303e2dffb56306d71622244 Mon Sep 17 00:00:00 2001
+From: gonzazoid <alloaolla@gmail.com>
+Date: Mon, 20 Jan 2025 22:12:20 +0300
+Subject: [PATCH] ultimatum: webextensions on Android,draft
+author: bearinmindcat <bearincrypto@gmail.com>
+date: Thu, 1 Oct 2026
+---
 diff --git a/chrome/browser/download/download_crx_util.cc b/chrome/browser/download/download_crx_util.cc
 --- a/chrome/browser/download/download_crx_util.cc
 +++ b/chrome/browser/download/download_crx_util.cc

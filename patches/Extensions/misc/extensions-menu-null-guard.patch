@@ -1,3 +1,5 @@
+author: bearinmindcat <bearincrypto@gmail.com>
+
 --- a/chrome/android/java/src/org/chromium/chrome/browser/ChromeTabbedActivity.java
 +++ b/chrome/android/java/src/org/chromium/chrome/browser/ChromeTabbedActivity.java
 @@ -4500,7 +4500,17 @@ public class ChromeTabbedActivity extend
